@@ -1,12 +1,11 @@
 from ecofunction import macd, ema, signal
 from trader import Trader, Share
 
-Kuba = Trader(1000)
-Kuba.buy_share(100, 82.5)
-Kuba.buy_share(150, 40)
+Player = Trader(1000)
 
-print(Kuba.get_money_account())
-share = Kuba.get_shares()
+while True:
+    if (input("Click q to exit. Click enter to continue: ") == 'q'):
+        break
 
-for i in share:
-    print(i)
+print("End of the visualization. Your money account is ", Player.get_money_account())
+
