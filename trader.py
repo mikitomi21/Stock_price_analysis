@@ -25,3 +25,9 @@ class Trader():
         self.money_account -= price
         share = Share(price, rate)
         self.shares.append(share)
+    
+    def sell_all_shares(self, current_rate):
+        for share in self.shares:
+            self.money_account += share.price * current_rate / share.rate
+        self.shares = []
+
