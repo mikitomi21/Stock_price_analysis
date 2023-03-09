@@ -13,7 +13,7 @@ intel_value['Srednia'] = (intel_value['Otwarcie'] + intel_value['Zamkniecie'])/2
 
 
 rating = []
-rating.append([macd(intel_value), signal(intel_value)])
+rating.append([macd(intel_value.iloc[START_DAY:START_DAY-50:-1]), signal(intel_value.iloc[START_DAY:START_DAY-50:-1])])
 day = 0
 
 
@@ -25,22 +25,20 @@ while True:
         break
 
     #Next day
-    intel_value = intel_value.iloc[1:]
-    #TODO odwrocic intel_value
-    rating.append([macd(intel_value), signal(intel_value)])
+    rating.append([macd(intel_value.iloc[day+START_DAY:day+START_DAY-50:-1]), signal(intel_value.iloc[day+START_DAY:day+START_DAY-50:-1])])
     day += 1
 
     #Buy
     if(rating[day-1][0] <= rating[day-1][1] and rating[day][0] > rating[day][1]):
         price = Player.get_money_account()*0.1 + 100
-        rate = intel_value['Srednia'].iloc[0]
+        rate = intel_value['Srednia'].iloc[day+START_DAY]
         Player.buy_share(price, rate)
 
         print(f"Player buy shade for: {price} with rating: {rate}. Your money account is {Player.get_money_account()}")
 
     #Sell
     elif (rating[day-1][0] >= rating[day-1][1] and rating[day][0] < rating[day][1]):
-        rate = intel_value['Srednia'].iloc[0]
+        rate = intel_value['Srednia'].iloc[day+START_DAY]
         Player.sell_all_shares(rate)
 
         print(f"Player sold all shares. Your money account is {Player.get_money_account()}")
