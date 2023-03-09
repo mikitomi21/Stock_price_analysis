@@ -26,6 +26,7 @@ while True:
 
     #Next day
     intel_value = intel_value.iloc[1:]
+    #TODO odwrocic intel_value
     rating.append([macd(intel_value), signal(intel_value)])
     day += 1
 
