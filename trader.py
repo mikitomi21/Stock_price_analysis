@@ -1,4 +1,9 @@
-class Share():
+class Tax:
+    NO = 1
+    YES = 0.95
+
+
+class Share:
     def __init__(self, price, rate):
         self.price = price
         self.rate = rate
@@ -8,11 +13,12 @@ class Share():
         return "Price: " + str(self.price) + " Rate: " + str(self.rate)
     
 
-class Trader():
-    def __init__(self,money_account):
+class Trader:
+    def __init__(self,money_account, tax=Tax.NO):
         self.money_account = money_account
+        self.tax = tax
         self.shares = []
-    
+
     def get_money_account(self):
         return self.money_account
     
@@ -28,6 +34,6 @@ class Trader():
     
     def sell_all_shares(self, current_rate):
         for share in self.shares:
-            self.money_account += share.price * current_rate / share.rate
+            self.money_account += share.price * self.tax * current_rate / share.rate
         self.shares = []
 

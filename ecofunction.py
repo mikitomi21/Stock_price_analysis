@@ -11,6 +11,7 @@ def ema(values, size):
 
 
 def signal(values):
+    #value[0] najstarszy dzien / value[n] dzien pierwszy
     signal = 0
     for i in range(9):
         signal += macd(values)
