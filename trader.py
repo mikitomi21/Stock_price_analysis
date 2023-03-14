@@ -14,7 +14,7 @@ class Share:
     
 
 class Trader:
-    def __init__(self,money_account, tax=Tax.NO):
+    def __init__(self,money_account, tax=Tax.YES):
         self.money_account = money_account
         self.tax = tax
         self.shares = []
